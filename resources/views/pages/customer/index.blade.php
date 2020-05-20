@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mt-4">
     <div class="mb-3">
-        <h3>Select your customer information</h3>
+        <h2>Select your customer information</h2>
         <form action="{{ route('customers.index') }}" method="GET">
             <div class="input-group">
-                <input value="{{ $filter_customer_name }}" name="customer%name" type="text" placeholder="enter name to search" class="form-control">
+                <input value="{{ $filter_customer_name }}" name="customer%name" type="text" placeholder="Search for a name" class="form-control">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit"><i class="fa fa-search"></i></button>
+                    <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
                 </div>
             </div>
         </form>
