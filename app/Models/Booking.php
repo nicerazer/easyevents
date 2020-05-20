@@ -10,10 +10,10 @@ class Booking extends Model
     protected $primaryKey = 'booking_id';
 
     public function customer() {
-        return $this->belongsTo('App\Models\Customer');
+        return $this->belongsTo('App\Models\Customer', 'customer_id', 'customer_id');
     }
 
     public function item() {
-        return $this->belongsTo('App\Models\Item');
+        return $this->belongsTo('App\Models\Item', 'item_id', 'item_id');
     }
 }
