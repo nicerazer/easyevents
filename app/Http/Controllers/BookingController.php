@@ -64,4 +64,14 @@ class BookingController extends Controller
 
         return redirect()->route('customers.show', $customer)->with('status', 'success');
     }
+
+    public function destroy($id) {
+        try {
+            $booking = Booking::findOrFail($id);
+        } catch (ModelNotFoundException $exception) {
+            return back()->withErrors($exception->getMessage())->withInput();
+        }
+        $booking->delete();
+        return redirect()->route('customers.show', $booking->customer_id)->with('status', 'success');
+    }
 }

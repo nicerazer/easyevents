@@ -4,7 +4,11 @@
 <div class="container w-50 mt-5">
     <div class="d-flex justify-content-between align-items-baseline mb-3">
         <h2><strong>Booking Details</strong></h2>
-        <a href="{{ route('bookings.destroy', $booking) }}" class="btn btn-sm btn-outline-danger px-5">Delete</a>
+        <form action="{{ route('bookings.destroy', $booking) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-sm btn-outline-danger px-5">Delete</button>
+        </form>
     </div>
     <div class="row">
         <div class="col-md-4">
