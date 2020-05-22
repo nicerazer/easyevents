@@ -10,4 +10,7 @@ class BookingController extends AbstractDashboardClass {
         return Booking::paginate($paginate_value);
     }
     protected $model_alias = "booking";
+    protected $model_attribute_aliases = [
+        'customer\'s name', 'item', 'quantity', 'date', 'created at'
+    ];
 }
