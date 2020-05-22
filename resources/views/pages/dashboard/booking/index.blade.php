@@ -1,20 +1,33 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">
+<div class="container mt-3">
+    <div class="d-flex align-items-baseline justify-content-between mb-3">
+        <h4 class="d-flex flex-row align-items-baseline">
+            20&nbsp;<strong>bookings</strong>&nbsp;<span class="text-muted">sorted by</span>&nbsp;
+            <x-sorter-component model-alias="booking" query-title="name" :stuffs="['customer\'s name'=>'descending', 'item'=>'ascending', 'date'=>'ascending', 'quantity'=>'ascending']" />
+        </h4>
+        <a href="{{ route('dashboard.bookings.create') }}" class="btn btn-sm btn-outline-primary px-5">Add new booking</a>
+    </div>
     <table class="table">
         <thead>
             <tr>
-                @foreach ($table_fields as $table_field=>$table_field_type)
-                <th {{ $table_field_type == "int" ? 'class=text-right' : '' }}>{{ $table_field }}</th>
-                @endforeach
+                <th>Id</th>
+                <th>Customer's name</th>
+                <th>Item</th>
+                <th class="text-right">Quantity</th>
+                <th class="text-right">Date</th>
+                <th class="text-right">Created At</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($bookings as $booking)
             <tr>
-                @foreach ($booking->getAttributes() as $column)
-                <td {{ is_int($column) ? 'class=text-right' : '' }}>{{ $column }}</td>
-                @endforeach
+                <td>{{ $booking->booking_id }}</td>
+                <td>{{ $booking->customer->full_name }}</td>
+                <td>{{ $booking->item->name }}</td>
+                <td class="text-right">{{ $booking->quantity }}</td>
+                <td class="text-right">{{ $booking->date }}</td>
+                <td class="text-right">{{ $booking->created_at->toDateString() }}</td>
             </tr>
             @endforeach
         </tbody>

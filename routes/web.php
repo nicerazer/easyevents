@@ -42,6 +42,7 @@ Route::delete('/bookings/{id_booking}/destroy', 'BookingController@destroy')->na
  * implementation utilizes manage all the models using a generic template.
  */
 Route::get('/dashboard/bookings', 'Dashboard\BookingController@index')->name('dashboard.bookings.index');
+Route::get('/dashboard/bookings/create', 'Dashboard\BookingController@create')->name('dashboard.bookings.create');
 // Booking indexing, creating, store
 // Route::resource('booking', 'BookingController')->only(['index', 'create', 'store']);
 
