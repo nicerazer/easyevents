@@ -4,6 +4,14 @@ use Illuminate\Support\Str;
 
 // Heroku postgresql service
 $DATABASE_URL = parse_url(getenv("DATABASE_URL"));
+// Failsafe
+if(!getenv("DATABASE_URL")) {
+    $DATABASE_URL["host"] = '';
+    $DATABASE_URL["port"] = '';
+    $DATABASE_URL["path"] = '';
+    $DATABASE_URL["user"] = '';
+    $DATABASE_URL["pass"] = '';
+}
 
 return [
 

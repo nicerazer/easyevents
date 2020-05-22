@@ -35,6 +35,13 @@ Route::get('/bookings/{id_booking}/edit', 'BookingController@edit')->name('booki
 Route::put('/bookings/{id_booking}/update', 'BookingController@update')->name('bookings.update');
 Route::delete('/bookings/{id_booking}/destroy', 'BookingController@destroy')->name('bookings.destroy');
 
+/**
+ * Dashboard routes
+ *
+ * A generic, crud-ful implementation for every model that exists. The controller
+ * implementation utilizes manage all the models using a generic template.
+ */
+Route::get('/dashboard/bookings', 'Dashboard\BookingController@index')->name('dashboard.bookings.index');
 // Booking indexing, creating, store
 // Route::resource('booking', 'BookingController')->only(['index', 'create', 'store']);
 

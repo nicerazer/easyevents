@@ -17,13 +17,14 @@ class CreateBookingsTable extends Migration
             $table->id('booking_id');
             $table->integer('quantity');
 
-            // Foreign keys
-            $table->unsignedBigInteger('customer_id');
-            $table->unsignedBigInteger('item_id');
-
             $table->date('date');
 
             $table->timestamps();
+        });
+        Schema::table('bookings', function (Blueprint $table) {
+            // Foreign keys
+            $table->unsignedBigInteger('customer_id')->after('booking_id');
+            $table->unsignedBigInteger('item_id')->after('customer_id');
         });
     }
 
