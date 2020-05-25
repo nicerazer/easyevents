@@ -41,38 +41,11 @@ Route::delete('/bookings/{id_booking}/destroy', 'BookingController@destroy')->na
  * A generic, crud-ful implementation for every model that exists. The controller
  * implementation utilizes manage all the models using a generic template.
  */
-Route::get('/dashboard/bookings', 'Dashboard\BookingController@index')->name('dashboard.bookings.index');
-Route::get('/dashboard/bookings/create', 'Dashboard\BookingController@create')->name('dashboard.bookings.create');
-// Booking indexing, creating, store
-// Route::resource('booking', 'BookingController')->only(['index', 'create', 'store']);
-
-// Booking indexing, show
-// Route::resource('/search', 'SearchController')->only(['index', 'show']);
-// Route::get('/search/booking', 'BookingSearchController@search');
-// Route::get('/search/booking/{id}', 'BookingSearchController@show');
-
-
-
-
-///////////////////////////////////////////////
-/**
- * Dashboard Resourceful Routes; Item, Booking
- */
-///////////////////////////////////////////////
-/*
-Route::get('dashboard', function() { return view('/pages/dashboard'); })->name('dashboard');
-// Routes: index, show, edit, update, destroy
-Route::resource('dashboard/items', 'DashboardItemController')->except(['create','store'])->middleware('auth');
-Route::resource('dashboard/bookings', 'DashboardBookingController')->except(['create','store'])->middleware('auth');
-
-// Dashboard Resourceful Routes; User
-// Routes: all CRUD related operation
-Route::get('/dashboard/users', function() {
-    return view('pages.dashboard.user.index', [
-        'customers' => Customer::paginate(15),
-        'staffs' => Staff::paginate(15),
-    ]);
-})->name('dashboard.user.index');
-Route::resource('dashboard/customers', 'DashboardCustomerController')->except('index')->middleware('auth');
-Route::resource('dashboard/staffs', 'DashboardStaffController')->except('index')->middleware('auth');
-*/
+Route::resource('dashboard/bookings', 'Dashboard\BookingController')->names([
+    'index' => 'dashboard.bookings.index',
+    'create' => 'dashboard.bookings.create',
+    'store' => 'dashboard.bookings.store',
+    'show' => 'dashboard.bookings.show',
+    'update' => 'dashboard.bookings.update',
+    'delete' => 'dashboard.bookings.delete',
+]);
