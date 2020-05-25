@@ -21,15 +21,18 @@ abstract class AbstractDashboardClass extends Controller
     }
 
     public function index(Request $request) {
-        $query_title_raw = key((array)$request->query());
-        $query_title_whitespace = str_replace('_', ' ', Str::of($query_title_raw)->title());
-        $query_title_uppercase = Str::of($query_title_whitespace)->title();
-        $query_order = current((array)$request->query());
+        // Query: Key
+        $query_key_raw = array_key_exists('key',$request->query()) && $request->query()['key'] !== null ? $request->query()['key'] : $this->model_attribute_aliases[0]; // Has key 'key', not NULL
+        $query_key_snake_case = str_replace(' ', '_', $query_key_raw);
+        $query_key_upper_case = Str::of($query_key_raw)->title();
+        // Query: Sort
+        $query_order = array_key_exists('sort',$request->query()) && $request->query()['sort'] !== null ? $request->query()['sort'] : 'asc'; // Has key 'sort', not NULL
 
+        // Navigation's sorting details (asc / desc)
         $sorting_details = array();
         foreach ($this->model_attribute_aliases as $val) {
             if(
-                $query_title_raw == $val &&
+                $query_key_raw == $val &&
                 $query_order == 'asc'
             )
                 $sorting_details[$val] = 'desc';
@@ -38,8 +41,8 @@ abstract class AbstractDashboardClass extends Controller
         }
 
         return view("pages.dashboard.$this->model_alias.index", [
-            $this->modelAliasPlural() => $this->getModels(5, $query_title_raw, $query_order), // Collect and pass model
-            'query_title' => $query_title_uppercase, // Current querying title
+            $this->modelAliasPlural() => $this->getModels(5, $query_key_snake_case, $query_order), // Collect and pass model
+            'query_title' => $query_key_upper_case, // Current querying title
             'sorting_details' => $sorting_details, // The sorting details whether ascending or descending
             'model_attributes' => $this->model_attribute_aliases, // Attributes or model available columns
             'model_count' => $this->getModelCount(),
