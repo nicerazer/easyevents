@@ -49,16 +49,16 @@ abstract class AbstractDashboardClass extends Controller
         ]);
     }
 
-    public function show($id) {
-        return view("pages.dashboard.$this->model_alias.show", [$this->model_alias => $this->getModel($id)]);
-    }
-
     public function create() {
     }
     public function store() {
         return '';
     }
-    public function edit() {}
+
+    public function show($id) {
+        return view("pages.dashboard.$this->model_alias.show", [$this->model_alias => $this->getModel($id)]);
+    }
+
     public function update() {}
     public function destroy() {}
 }

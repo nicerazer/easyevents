@@ -41,7 +41,7 @@ Route::delete('/bookings/{id_booking}/destroy', 'BookingController@destroy')->na
  * A generic, crud-ful implementation for every model that exists. The controller
  * implementation utilizes manage all the models using a generic template.
  */
-Route::resource('dashboard/bookings', 'Dashboard\BookingController')->names([
+Route::resource('dashboard/bookings', 'Dashboard\BookingController')->except('edit')->names([
     // These are added for 'dashboard' prefix purposes
     'index' => 'dashboard.bookings.index',
     'create' => 'dashboard.bookings.create',
