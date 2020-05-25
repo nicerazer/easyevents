@@ -11,6 +11,7 @@ abstract class AbstractDashboardClass extends Controller
 {
     // Model Methods
     abstract protected function getModels($paginate_value, $query, $order);
+    abstract protected function getModelCount();
     // Model Attributes
     protected $model_alias;
     protected $model_attribute_aliases; // Please use single quotes and escape any special characters
@@ -41,6 +42,7 @@ abstract class AbstractDashboardClass extends Controller
             'query_title' => $query_title_uppercase, // Current querying title
             'sorting_details' => $sorting_details, // The sorting details whether ascending or descending
             'model_attributes' => $this->model_attribute_aliases, // Attributes or model available columns
+            'model_count' => $this->getModelCount(),
         ]);
     }
     public function show() {
