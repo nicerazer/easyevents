@@ -48,5 +48,5 @@ Route::resource('dashboard/bookings', 'Dashboard\BookingController')->names([
     'store' => 'dashboard.bookings.store',
     'show' => 'dashboard.bookings.show',
     'update' => 'dashboard.bookings.update',
-    'delete' => 'dashboard.bookings.delete',
+    'destroy' => 'dashboard.bookings.destroy',
 ]);
