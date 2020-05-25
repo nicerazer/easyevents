@@ -40,6 +40,6 @@
             @endforeach
         </tbody>
     </table>
-    {{ $bookings->links() }}
+    {{ $bookings->withQueryString()->links() }}
 </div>
 @endsection
