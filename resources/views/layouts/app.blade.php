@@ -75,6 +75,8 @@
             </div>
         </nav>
 
+        @yield('breadcrumb')
+
         <main class="py-4">
             @yield('content')
         </main>

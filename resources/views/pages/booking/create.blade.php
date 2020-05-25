@@ -17,6 +17,7 @@
             <label>Quantity</label>
             <input name="quantity" class="form-control w-25" type="number" default="1" min="1" max="20" required>
         </div>
+        {{-- ADD DATE --}}
         <button class="btn btn-outline-primary">Submit Booking</button>
     </form>
 </div>

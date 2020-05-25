@@ -44,12 +44,15 @@ abstract class AbstractDashboardClass extends Controller
             $this->modelAliasPlural() => $this->getModels(5, $query_key_snake_case, $query_order), // Collect and pass model
             'query_title' => $query_key_upper_case, // Current querying title
             'sorting_details' => $sorting_details, // The sorting details whether ascending or descending
-            'model_attributes' => $this->model_attribute_aliases, // Attributes or model available columns
+            'model_attributes' => $this->model_attribute_aliases, // Available attributes / model-columns for sorting
             'model_count' => $this->getModelCount(),
         ]);
     }
-    public function show() {
+
+    public function show($id) {
+        return view("pages.dashboard.$this->model_alias.show", [$this->model_alias => $this->getModel($id)]);
     }
+
     public function create() {
     }
     public function store() {
