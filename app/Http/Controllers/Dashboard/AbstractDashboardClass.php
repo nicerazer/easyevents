@@ -4,18 +4,22 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 abstract class AbstractDashboardClass extends Controller
 {
-    // Model Methods
+    // Abstract Model Methods : Get
+    abstract protected function getModel($id);
     abstract protected function getModels($paginate_value, $query, $order);
     abstract protected function getModelCount();
+    // Abstract Model Methods : Mutators
+    abstract protected function updateModel(Request $request, $model); // Requires a model as the parameter
+    abstract protected function deleteModel($model); // Requires a model as the parameter
+
     // Model Attributes
     protected $model_alias;
     protected $model_attribute_aliases; // Please use single quotes and escape any special characters
-    // Mutator Methods
+    // Processor Methods
     protected function modelAliasPlural() {
         return Str::of($this->model_alias)->plural()->__toString();
     }
@@ -59,6 +63,14 @@ abstract class AbstractDashboardClass extends Controller
         return view("pages.dashboard.$this->model_alias.show", [$this->model_alias => $this->getModel($id)]);
     }
 
-    public function update() {}
-    public function destroy() {}
+    public function update(Request $request, $id) {
+        $model = $this->updateModel($request, $this->getModel($id));
+        // TODO: Flash messages
+        return redirect()->route("dashboard.".$this->modelAliasPlural().".show", $id);
+    }
+    public function destroy($id) {
+        $model = $this->deleteModel($this->getModel($id));
+        // TODO: Flash messages
+        return redirect()->route("dashboard.".$this->modelAliasPlural().".index");
+    }
 }
