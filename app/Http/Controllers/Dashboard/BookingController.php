@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class BookingController extends AbstractDashboardClass {
     protected function getModel($id) {
-        return Booking::find($id);
+        return Booking::findOrFail($id);
     }
     protected function getModels($paginate_value, $query, $order) {
         return Booking::orderBy($query, $order)->paginate($paginate_value);

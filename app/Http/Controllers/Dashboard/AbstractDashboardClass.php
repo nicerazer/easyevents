@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -19,6 +20,15 @@ abstract class AbstractDashboardClass extends Controller
     // Model Attributes
     protected $model_alias;
     protected $model_attribute_aliases; // Please use single quotes and escape any special characters
+    // Accessor Methods
+    protected function getModelErrorHandled($id) {
+        try {
+            $model = $this->getModel($id);
+        } catch (ModelNotFoundException $exception) {
+            return $exception;
+        }
+        return $model;
+    }
     // Processor Methods
     protected function modelAliasPlural() {
         return Str::of($this->model_alias)->plural()->__toString();
@@ -60,16 +70,29 @@ abstract class AbstractDashboardClass extends Controller
     }
 
     public function show($id) {
-        return view("pages.dashboard.$this->model_alias.show", [$this->model_alias => $this->getModel($id)]);
+        $model = $this->getModelErrorHandled($id);
+        if($model instanceof ModelNotFoundException) {
+            return redirect()->route('dashboard.'.$this->modelAliasPlural().'.index')->withErrors($model->getMessage())->withInput();
+        }
+        return view("pages.dashboard.$this->model_alias.show", [$this->model_alias => $model]);
     }
 
     public function update(Request $request, $id) {
-        $model = $this->updateModel($request, $this->getModel($id));
+        $model = $this->getModelErrorHandled($id);
+        if($model instanceof ModelNotFoundException) {
+            return redirect()->route('dashboard.'.$this->modelAliasPlural().'.index')->withErrors($model->getMessage())->withInput();
+        }
+        $model = $this->updateModel($request, $model);
         // TODO: Flash messages
         return redirect()->route("dashboard.".$this->modelAliasPlural().".show", $id);
     }
+
     public function destroy($id) {
-        $model = $this->deleteModel($this->getModel($id));
+        $model = $this->getModelErrorHandled($id);
+        if($model instanceof ModelNotFoundException) {
+            return redirect()->route('dashboard.'.$this->modelAliasPlural().'.index')->withErrors($model->getMessage())->withInput();
+        }
+        $model = $this->deleteModel($model);
         // TODO: Flash messages
         return redirect()->route("dashboard.".$this->modelAliasPlural().".index");
     }
