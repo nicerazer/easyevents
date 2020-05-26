@@ -16,4 +16,6 @@ class Booking extends Model
     public function item() {
         return $this->belongsTo('App\Models\Item', 'item_id', 'item_id');
     }
+
+    protected $fillable = ['customer_id', 'item_id', 'quantity', 'date'];
 }

@@ -13,7 +13,10 @@ abstract class AbstractDashboardClass extends Controller
     abstract protected function getModel($id);
     abstract protected function getModels($paginate_value, $query, $order);
     abstract protected function getModelCount();
+    abstract protected function collectRelatedModels(Request $request); // Collect all the related models
+    abstract protected function queryPaginateModels(Request $request); // Creates an array of queries for related models
     // Abstract Model Methods : Mutators
+    abstract protected function storeModel(Request $request);
     abstract protected function updateModel(Request $request, $model); // Requires a model as the parameter
     abstract protected function deleteModel($model); // Requires a model as the parameter
 
@@ -34,13 +37,25 @@ abstract class AbstractDashboardClass extends Controller
         return Str::of($this->model_alias)->plural()->__toString();
     }
 
+    /**
+     * Extract The Specified Query
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param String $key
+     * @param String $default
+     * @return String A single specified query
+     */
+    protected function queryExtract(Request $request, $key, $default) {
+        return array_key_exists($key,$request->query()) && $request->query()[$key] !== null ? $request->query()[$key] : $default; // Has key $key, not NULL
+    }
+
     public function index(Request $request) {
         // Query: Key
-        $query_key_raw = array_key_exists('key',$request->query()) && $request->query()['key'] !== null ? $request->query()['key'] : $this->model_attribute_aliases[0]; // Has key 'key', not NULL
+        $query_key_raw = $this->queryExtract($request,'key',$this->model_attribute_aliases[0]);
         $query_key_snake_case = str_replace(' ', '_', $query_key_raw);
         $query_key_upper_case = Str::of($query_key_raw)->title();
         // Query: Sort
-        $query_order = array_key_exists('sort',$request->query()) && $request->query()['sort'] !== null ? $request->query()['sort'] : 'asc'; // Has key 'sort', not NULL
+        $query_order = $this->queryExtract($request, 'key', 'asc'); // Has key 'sort', not NULL
 
         // Navigation's sorting details (asc / desc)
         $sorting_details = array();
@@ -63,10 +78,13 @@ abstract class AbstractDashboardClass extends Controller
         ]);
     }
 
-    public function create() {
+    public function create(Request $request) {
+        return view("pages.dashboard.$this->model_alias.create", array_merge($this->collectRelatedModels($request), $this->queryPaginateModels($request)));
     }
-    public function store() {
-        return '';
+
+    public function store(Request $request) {
+        $model = $this->storeModel($request);
+        return redirect()->route('dashboard.'.$this->modelAliasPlural().'.show', $model);
     }
 
     public function show($id) {
