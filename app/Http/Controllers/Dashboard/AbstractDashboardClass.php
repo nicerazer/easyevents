@@ -55,7 +55,7 @@ abstract class AbstractDashboardClass extends Controller
         $query_key_snake_case = str_replace(' ', '_', $query_key_raw);
         $query_key_upper_case = Str::of($query_key_raw)->title();
         // Query: Sort
-        $query_order = $this->queryExtract($request, 'key', 'asc'); // Has key 'sort', not NULL
+        $query_order = $this->queryExtract($request, 'sort', 'asc'); // Has key 'sort', not NULL
 
         // Navigation's sorting details (asc / desc)
         $sorting_details = array();
