@@ -4,6 +4,7 @@ use App\Models\Customer;
 use App\Models\Staff;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 Auth::routes();
 
@@ -41,12 +42,16 @@ Route::delete('/bookings/{id_booking}/destroy', 'BookingController@destroy')->na
  * A generic, crud-ful implementation for every model that exists. The controller
  * implementation utilizes manage all the models using a generic template.
  */
-Route::resource('dashboard/bookings', 'Dashboard\BookingController')->except('edit')->names([
-    // These are added for 'dashboard' prefix purposes
-    'index' => 'dashboard.bookings.index',
-    'create' => 'dashboard.bookings.create',
-    'store' => 'dashboard.bookings.store',
-    'show' => 'dashboard.bookings.show',
-    'update' => 'dashboard.bookings.update',
-    'destroy' => 'dashboard.bookings.destroy',
-]);
+foreach (['booking', 'items', 'customers'] as $model) {
+    $model_plural = Str::plural($model);
+    $model_upper_case = ucfirst($model);
+    Route::resource("dashboard/$model_plural", 'Dashboard\\'.$model_upper_case.'Controller')->except('edit')->names([
+        // These are added for 'dashboard' prefix purposes
+        'index' => "dashboard.$model_plural.index",
+        'create' => "dashboard.$model_plural.create",
+        'store' => "dashboard.$model_plural.store",
+        'show' => "dashboard.$model_plural.show",
+        'update' => "dashboard.$model_plural.update",
+        'destroy' => "dashboard.$model_plural.destroy",
+    ]);
+}

@@ -2,8 +2,8 @@
 @section('breadcrumb')
 <nav aria-label="breadcrumb mt-0 bg-dark">
     <ol class="breadcrumb px-5">
-        <li class="breadcrumb-item active" aria-current="page"><a href="#">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('dashboard.bookings.index') }}">Booking</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a href="#">Dashboard</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a href="{{ route('dashboard.bookings.index') }}">Booking</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ $booking->booking_id }}</li>
     </ol>
 </nav>
@@ -30,7 +30,7 @@
                 <span class="text-muted">Customer's Name</span>
             </div>
             <div class="col-9">
-                <a href="#">{{ $booking->customer->full_name }}</a>
+                <a href="{{ route('dashboard.customers.show', $booking->customer->customer_id) }}">{{ $booking->customer->full_name }}</a>
             </div>
         </div>
         <div class="row mb-4">
@@ -38,7 +38,7 @@
                 <span class="text-muted">Item</span>
             </div>
             <div class="col-9">
-                <a href="#">{{ $booking->item->name }}</a>
+                <a href="{{ route('dashboard.items.show', $booking->item->item_id) }}">{{ $booking->item->name }}</a>
             </div>
         </div>
         <div class="row mb-3">

@@ -1,4 +1,12 @@
 @extends('layouts.app')
+@section('breadcrumb')
+<nav aria-label="breadcrumb mt-0 bg-dark">
+    <ol class="breadcrumb px-5">
+        <li class="breadcrumb-item" aria-current="page"><a href="#">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Booking</li>
+    </ol>
+</nav>
+@endsection
 @section('content')
 <div class="container mt-3">
     <div class="d-flex align-items-baseline justify-content-between mb-3">
@@ -30,9 +38,9 @@
         <tbody>
             @foreach ($bookings as $booking)
             <tr>
-                <td>{{ $booking->booking_id }}</td>
-                <td>{{ $booking->customer->full_name }}</td>
-                <td>{{ $booking->item->name }}</td>
+                <td><a href="{{ route('dashboard.bookings.show', $booking->booking_id) }}">{{ $booking->booking_id }}</a></td>
+                <td><a href="{{ route('dashboard.customers.show', $booking->customer->customer_id) }}">{{ $booking->customer->full_name }}</a></td>
+                <td><a href="{{ route('dashboard.items.show', $booking->item->item_id) }}">{{ $booking->item->name }}</a></td>
                 <td class="text-right">{{ $booking->quantity }}</td>
                 <td class="text-right">{{ $booking->date }}</td>
                 <td class="text-right">{{ $booking->created_at->toDateString() }}</td>
