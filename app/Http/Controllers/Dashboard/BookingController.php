@@ -53,6 +53,6 @@ class BookingController extends AbstractDashboardClass {
     protected $model_alias = "booking";
     protected $model_attribute_aliases = [
         // 'customer\'s name', 'item', 'quantity', 'date', 'created at'
-        'quantity', 'date', 'created at'
+        'booking id', 'quantity', 'date', 'created at'
     ];
 }
