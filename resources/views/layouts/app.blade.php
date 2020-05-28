@@ -80,6 +80,12 @@
         <main class="py-4">
             @yield('content')
         </main>
+
     </div>
+    <script>
+        window.onload = function() {
+            @yield('script')
+        }
+    </script>
 </body>
 </html>
