@@ -42,7 +42,8 @@ class BookingController extends AbstractDashboardClass {
     protected function updateModel(Request $request, $model) {
         $model->quantity = $request->quantity;
         $model->date = Carbon::parse($request->date);
-        return $model->save();
+        $model->save();
+        return $model;
     }
     protected function deleteModel($model) {
         return $model->delete();
