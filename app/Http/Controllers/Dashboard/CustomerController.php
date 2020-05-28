@@ -41,6 +41,6 @@ class CustomerController extends AbstractDashboardClass {
     }
     protected $model_alias = "customer";
     protected $model_attribute_aliases = [
-        'customer id','first name', 'last name', 'created at'
+        'customer id','first name', 'last name', 'phone number', 'created at', 'updated at'
     ];
 }
