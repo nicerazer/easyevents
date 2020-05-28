@@ -12,4 +12,10 @@ class Item extends Model
     public function booking() {
         return $this->hasOne('App\Models\Booking');
     }
+
+    public function getPriceFormattedAttribute() {
+        return number_format($this->price, 2, '.', ',');
+    }
+
+    protected $fillable = ['name', 'description', 'price'];
 }
