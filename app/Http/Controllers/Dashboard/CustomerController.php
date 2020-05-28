@@ -31,7 +31,8 @@ class CustomerController extends AbstractDashboardClass {
         $model->first_name = $request->first_name;
         $model->last_name = $request->last_name;
         $model->phone_number = $request->phone_number;
-        return $model->save();
+        $model->save();
+        return $model;
     }
     protected function deleteModel($model) {
         return $model->delete();
