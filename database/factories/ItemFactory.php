@@ -22,7 +22,7 @@ $factory->define(Item::class, function (Faker $faker) {
 
     return [
         'name' => $faker->productName,
-        'description' => $faker->sentence($nbWords = mt_rand(10, 25), $variableNbWords = true),
+        'description' => $faker->sentence($nbWords = mt_rand(8, 16), $variableNbWords = true),
         'price' => mt_rand(1, 20),
         'img_path' => '',
     ];
