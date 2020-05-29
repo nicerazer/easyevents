@@ -4,7 +4,7 @@
 <div class="container w-50 mt-5">
     <h2 class="mb-3"><strong>Become a new customer</strong></h2>
     <h5 class="mb-3">Personal information</h5>
-    <form action="{{ route('customers.create') }}" method="POST" class="mb-4">
+    <form action="{{ route('customers.store') }}" method="POST" class="mb-4">
         @csrf
         <div class="row">
             <div class="col-6">
