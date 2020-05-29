@@ -46,6 +46,9 @@ class ItemController extends AbstractDashboardClass {
         return $model;
     }
     protected function deleteModel($model) {
+        foreach ($model->bookings as $booking) {
+            $booking->delete();
+        }
         if($model->img_path && Storage::url($model->img_path)) { // Image existence in db & storage
             Storage::delete($model->img_path);
         }

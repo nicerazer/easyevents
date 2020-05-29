@@ -35,6 +35,9 @@ class CustomerController extends AbstractDashboardClass {
         return $model;
     }
     protected function deleteModel($model) {
+        foreach ($model->bookings as $booking) {
+            $booking->delete();
+        }
         return $model->delete();
     }
     protected function getModelCount() {

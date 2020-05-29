@@ -9,8 +9,8 @@ class Item extends Model
     protected $table = 'items';
     protected $primaryKey = 'item_id';
 
-    public function booking() {
-        return $this->hasOne('App\Models\Booking');
+    public function bookings() {
+        return $this->hasMany('App\Models\Booking', 'item_id', 'item_id');
     }
 
     public function getPriceFormattedAttribute() {
