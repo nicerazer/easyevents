@@ -14,7 +14,7 @@ Route::get('/', function () { return view('/pages/home'); })->name('home');
 /**
  * CRUDful customer routings
  */
-Route::get('/customers', 'CustomerController@index')->name('customers.index');
+Route::get('/customers', 'CustomerController@find')->name('customers.find');
 Route::get('/customers/create', 'CustomerController@create')->name('customers.create');
 Route::post('/customers/store', 'CustomerController@store')->name('customers.store');
 Route::get('/customers/{id}', 'CustomerController@show')->name('customers.show');

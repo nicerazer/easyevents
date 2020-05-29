@@ -16,18 +16,45 @@
     </div>
 </section>
 <hr>
-<section id="section--home--search-customer" style="padding: 200px 0;">
+<section id="section--home--search-customer" style="padding: 100px 0;">
     <div class="container">
         <div class="d-flex align-items-center justify-content-center flex-column">
+            <h3 class="mb-4"><strong>Search for your exact credentials to start booking!</strong></h3>
             <div class="float-left">
-                <h3 class="mb-4"><strong>Search for your name to start booking!</strong></h3>
-                <form action="{{ route('customers.index') }}" method="GET">
-                    <div class="input-group m-0">
-                        <input name="first_name" type="text" class="form-control" placeholder="E.g: John Doe">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" id="button-addon2"><i class="fa fa-search"></i></button>
+                <form action="{{ route('customers.find') }}" method="GET">
+                    <div class="row">
+                        @if ($errors->any())
+                        <div class="col-md-12">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                @foreach ($errors->all() as $error)
+                                {{ $error }}
+                                @endforeach
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                        @endif
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input name="first_name" type="text" class="form-control" placeholder="John">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input name="last_name" type="text" class="form-control" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input name="phone_number" type="text" class="form-control" placeholder="Phone Number">
+                            </div>
                         </div>
                     </div>
+                    <button class="btn btn-outline-primary btn-block btn-sm px-5"><i class="fa fa-search"></i> Search</button>
                 </form>
                 <a href="{{ route('customers.create') }}">or click here to become a new customer</a>
             </div>
