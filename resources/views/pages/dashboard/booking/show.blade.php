@@ -59,7 +59,7 @@
             </div>
             <div class="col-4">
                 <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
-                    <input name="date" type="text" class="form-control" value="{{ $booking->date }}">
+                    <input name="date" type="text" class="form-control" value="{{ $booking->date->toDateString() }}">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="button"><i class="fa fa-th"></i></button>
                     </div>

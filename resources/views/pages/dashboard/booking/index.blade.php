@@ -42,7 +42,7 @@
                 <td><a href="{{ route('dashboard.customers.show', $booking->customer->customer_id) }}">{{ $booking->customer->full_name }}</a></td>
                 <td><a href="{{ route('dashboard.items.show', $booking->item->item_id) }}">{{ $booking->item->name }}</a></td>
                 <td class="text-right">{{ $booking->quantity }}</td>
-                <td class="text-right">{{ $booking->date }}</td>
+                <td class="text-right">{{ $booking->date->toDateString() }}</td>
                 <td class="text-right">{{ $booking->created_at->toDateString() }}</td>
             </tr>
             @endforeach

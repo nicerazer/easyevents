@@ -21,7 +21,7 @@
         </div>
         <div class="col-md-4">
             <h4>Date Booked</h4>
-            <p>{{ $booking->created_at->toDateString() }}</p>
+            <p>{{ $booking->date->toDateString() }}</p>
         </div>
     </div>
     <small class="text-muted">*Items cannot be modified once booked. Please delete, and create a new one to change the details</small>

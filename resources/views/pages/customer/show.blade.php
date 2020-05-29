@@ -30,7 +30,7 @@
                 <td>{{ $booking->booking_id }}</td>
                 <td><a href="{{ route('bookings.show', $booking) }}">{{ $booking->item->name }}</a></td>
                 <td class="text-right">{{ $booking->quantity }}</td>
-                <td class="text-right">{{ $booking->created_at }}</td>
+                <td class="text-right">{{ $booking->date->toDateString() }}</td>
             </tr>
             @endforeach
         </tbody>

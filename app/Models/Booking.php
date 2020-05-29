@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Booking extends Model
@@ -16,6 +17,8 @@ class Booking extends Model
     public function item() {
         return $this->belongsTo('App\Models\Item', 'item_id', 'item_id');
     }
+
+    protected $casts = ['date' => 'datetime:Y-m-d'];
 
     protected $fillable = ['customer_id', 'item_id', 'quantity', 'date'];
 }

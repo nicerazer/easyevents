@@ -55,8 +55,8 @@ class BookingController extends Controller
 
         $booking->quantity = $request->quantity;
         $booking->customer_id = $customer->customer_id;
+        $booking->date = $request->date;
         $booking->item_id = $item->item_id;
-        $booking->date = Carbon::now();
         // Implement date time picker
         // $booking->date = $request->date;
 

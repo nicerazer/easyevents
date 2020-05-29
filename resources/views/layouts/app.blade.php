@@ -36,7 +36,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        @guest
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('customers.index') }}">Customers Listing<span class="sr-only">(current)</span></a>
+                        </li>
+                        @endguest
                     </ul>
 
                     <!-- Right Side Of Navbar -->
