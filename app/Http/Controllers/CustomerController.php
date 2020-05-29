@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Booking;
 use App\Models\Customer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
@@ -56,7 +54,7 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $customer = new Booking;
+        $customer = new Customer;
 
         $customer->first_name = $request->first_name;
         $customer->last_name = $request->last_name;
@@ -64,7 +62,7 @@ class CustomerController extends Controller
 
         $customer->save();
 
-        return redirect('/home')->with('status', 'success');
+        return redirect()->route('customers.index', $customer)->with('status', 'success');
     }
 
     /**
