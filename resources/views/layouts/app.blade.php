@@ -40,6 +40,10 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="{{ route('customers.index') }}">Customers Listing<span class="sr-only">(current)</span></a>
                         </li>
+                        @else
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('dashboard.hub') }}">Dashboard<span class="sr-only">(current)</span></a>
+                        </li>
                         @endguest
                     </ul>
 
