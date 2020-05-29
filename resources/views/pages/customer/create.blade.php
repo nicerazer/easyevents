@@ -24,7 +24,7 @@
             <label>Phone Number</label>
             <input name="phone_number" type="text" class="form-control" placeholder="e.g: +6 012 345 6789" required>
         </div>
+        <button class="btn btn-outline-primary px-4">Submit Form!</button>
     </form>
-    <button class="btn btn-outline-primary px-4">Submit Form!</button>
 </div>
 @endsection
