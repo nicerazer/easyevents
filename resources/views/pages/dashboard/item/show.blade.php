@@ -57,7 +57,7 @@
         </div>
         <div class="row mb-3">
             <div class="offset-3 col-4">
-                @php ($img_placeholder = asset('storage/img/placeholder_600x600.jpg'))
+                @php ($img_placeholder = asset('img/placeholder_600x600.jpg'))
                 <div class="d-flex">
                     <img id="item-img" src="{{ $item->img_path ? Storage::url($item->img_path) : $img_placeholder }}" alt="Item Image" class="img-fluid img-thumbnail">
                 </div>

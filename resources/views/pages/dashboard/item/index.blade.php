@@ -29,7 +29,7 @@
             </tr>
         </thead>
         <tbody>
-            @php ($img_placeholder = asset('storage/img/placeholder_600x600.jpg'))
+            @php ($img_placeholder = asset('img/placeholder_600x600.jpg'))
             @foreach ($items as $item)
             <tr>
                 <td><a href="{{ route('dashboard.items.show', $item->item_id) }}">{{ $item->item_id }}</a></td>
