@@ -2,7 +2,7 @@
 @section('breadcrumb')
 <nav aria-label="breadcrumb mt-0 bg-dark">
     <ol class="breadcrumb px-5">
-        <li class="breadcrumb-item active" aria-current="page"><a href="#">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('dashboard.hub') }}">Dashboard</a></li>
         <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('dashboard.staff.index') }}">Staff</a></li>
         <li class="breadcrumb-item active" aria-current="page">Create</li>
     </ol>

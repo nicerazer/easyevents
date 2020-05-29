@@ -42,6 +42,7 @@ Route::delete('/bookings/{id_booking}/destroy', 'BookingController@destroy')->na
  * A generic, crud-ful implementation for every model that exists. The controller
  * implementation utilizes manage all the models using a generic template.
  */
+Route::get('/dashboard', 'Dashboard\Hub')->name('dashboard.hub');
 foreach (['booking', 'item', 'customer', 'staff'] as $model) {
     $model_plural = Str::plural($model);
     $model_upper_case = ucfirst($model);
@@ -53,5 +54,5 @@ foreach (['booking', 'item', 'customer', 'staff'] as $model) {
         'show' => "dashboard.$model_plural.show",
         'update' => "dashboard.$model_plural.update",
         'destroy' => "dashboard.$model_plural.destroy",
-    ]);
+    ])->middleware('auth');
 }
