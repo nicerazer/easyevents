@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Staff;
 use Illuminate\Database\Seeder;
 
 class AdminSeeder extends Seeder
@@ -11,16 +12,18 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('staffs')->insertOrIgnore([
-            [
+        // DB::table('staff')->insertOrIgnore([
+        //     [
+            Staff::firstOrCreate([
                 'username' => 'ezev_admin',
                 'first_name' => 'admin',
                 'last_name' => 'master',
                 'email' => 'admin@example.com',
-                'email_verified_at' => now(),
+                // 'email_verified_at' => now(),
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'remember_token' => Str::random(10)
-            ]
-        ]);
+            ]);
+        //     ]
+        // ]);
     }
 }
